@@ -6,6 +6,7 @@
 
 ## Installation
 
+* git clone https://github.com/R3veng3R/react_webpack.git
 * cd react_webpack
 * npm install
 * npm start
