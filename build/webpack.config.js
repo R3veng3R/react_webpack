@@ -68,5 +68,18 @@ module.exports = {
         open: true,
         overlay: true,
         port: DEV_SERVER_PORT,
+
+        proxy: [
+            {
+                context: ['/api'],
+                target: 'https://api.coindesk.com/v1/bpi/',
+                pathRewrite: {'^/api' : ''},
+                secure: true,
+                changeOrigin: true
+            }
+        ]
     },
+
+    mode: 'development',
+    devtool: 'eval-source-map',
 };

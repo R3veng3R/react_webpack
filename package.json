@@ -13,6 +13,7 @@
   "license": "UNLICENSED",
   "devDependencies": {
     "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "autoprefixer": "^9.5.1",
@@ -30,6 +31,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "lodash.debounce": "^4.0.8",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   }

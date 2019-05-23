@@ -1,10 +1,14 @@
 import React, {Component} from "react";
-import Welcome from "@/components/welcome/Welcome";
+import Input from "@/components/input/Input";
+
+import './app.scss';
 
 class App extends Component {
     render() {
         return (
-            <Welcome/>
+            <div className="container">
+                <Input />
+            </div>
         );
     }
 }
