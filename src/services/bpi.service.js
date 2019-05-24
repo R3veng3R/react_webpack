@@ -11,7 +11,7 @@ const DATE_FORMAT = 'YYYY-MM-DD';
  * WE WRAP ALL OUR AXIOS REQUESTS IN ANOTHER PROMISE
  * TO PROCESS ALL THE ERRORS THAT COULD HAPPEN
  * WHEN FETCHING DATA AND HANDLE THEM CORRECTLY
-*/
+ */
 class BpiService extends BaseService {
     getSupportedCurrencies() {
         return new Promise((resolve, reject) => {
