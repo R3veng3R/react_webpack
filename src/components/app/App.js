@@ -23,10 +23,9 @@ class App extends Component {
     setValue(value) {
         this.setState({
             value: value,
-            suggestions: []
+            suggestions: [],
+            selectedCurrencyItem: {}
         });
-
-        console.log('test new');
 
         if (value.length > 0) {
             this.getSupportedCurrencies();
@@ -63,12 +62,12 @@ class App extends Component {
     setCurrencyItem = (item) => {
         this.setState({
             value: item.currency,
-            suggestions: []
+            suggestions: [],
         });
 
         BpiService.getCurrentCurrencyData(item.currency)
-            .then(data => {
-                console.log('received data:', data)
+            .then(item => {
+                this.setState({selectedCurrencyItem: item});
             })
             .catch(error => {return error});
     };
@@ -80,7 +79,7 @@ class App extends Component {
                     <Input value={this.state.value} onChange={event => this.setValue(event.target.value)} />
                     <AutocompleteList suggestions={this.state.suggestions} onClick={ this.setCurrencyItem } />
                 </div>
-                <CurrencyDisplay />
+                <CurrencyDisplay currencyData={this.state.selectedCurrencyItem}/>
             </div>
         );
     }

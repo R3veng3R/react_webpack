@@ -1,9 +1,11 @@
 import BaseService from "@/services/base.service";
 import {ErrorWrapper} from "@/util/ErrorWrapper";
+import moment from 'moment';
 
 const SUPPORTED_CURRENCIES_API = '/api/supported-currencies.json';
 const CURRENT_PRICE_API = '/api/currentprice/';
 const CURRENT_HISTORY_API = '/api/historical/close.json';
+const DATE_FORMAT = 'YYYY-MM-DD';
 
 class BpiService extends BaseService {
 
@@ -21,20 +23,27 @@ class BpiService extends BaseService {
         return this.request().get(CURRENT_PRICE_API + code + '.json');
     }
 
-    getCurrentHistory(code) {
-        return this.request().get(CURRENT_HISTORY_API + '?currency='+code+'&start=2019-05-01&end=2019-05-24');
+    getLastMonthHistory(code) {
+        let startDate = moment().subtract(1,'months').startOf('month').format(DATE_FORMAT);
+        let endDate = moment().subtract(1,'months').endOf('month').format(DATE_FORMAT);
+
+        return this.request().get(CURRENT_HISTORY_API + '?currency=' + code + '&start=' + startDate + '&end=' + endDate);
     }
 
     getCurrentCurrencyData(code) {
         return new Promise((resolve, reject) => {
-            return Promise.all([this.getCurrentPrice(code), this.getCurrentHistory(code)])
+            return Promise.all([this.getCurrentPrice(code), this.getLastMonthHistory(code)])
                 .then(([priceResponse, historyResponse]) => {
-                    let data = {
-                        currentPrice: priceResponse,
-                        history: historyResponse
+                    let priceData = priceResponse.data.bpi[code];
+                    let historyData = historyResponse.data.bpi;
+
+                    let currencyItem = {
+                        code: code.toUpperCase(),
+                        currentPrice: priceData.rate_float,
+                        history: historyData
                     };
 
-                    return resolve(data);
+                    return resolve(currencyItem);
                 })
                 .catch(error => {
                     reject(new ErrorWrapper(error))

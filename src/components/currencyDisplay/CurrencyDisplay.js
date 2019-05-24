@@ -5,11 +5,27 @@ class CurrencyDisplay extends Component {
         super(props);
     }
 
+    printHistory = () => {
+        let historyData = this.props.currencyData.history;
+
+        if (!historyData || historyData.length === 0) {
+            return [];
+        }
+
+        return (
+            Object.keys(historyData).map(date =>
+                <div>
+                    {date} : {historyData[date]}
+                </div>
+            )
+        );
+    };
+
     render() {
         return (
             <div className="currency-display">
-                <p>CurrentPrice: {this.props.currentPrice} </p>
-                <p>History: {this.props.currentPrice} </p>
+                <p>CurrentPrice: {this.props.currencyData.currentPrice} </p>
+                { this.printHistory() }
             </div>
         );
     }
