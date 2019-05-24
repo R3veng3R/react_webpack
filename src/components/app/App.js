@@ -38,12 +38,8 @@ class App extends Component {
 
     getSupportedCurrencies = debounce(() => {
         BpiService.getSupportedCurrencies()
-            .then(data => {
-                this.setState({suggestions: this.filterData(data)});
-            })
-            .catch(error => {
-                return error
-            });
+            .then(data => {this.setState({suggestions: this.filterData(data)});})
+            .catch(error => {return error});
 
     }, DEBOUNCE_DELAY_TIME_MS);
 
@@ -67,9 +63,7 @@ class App extends Component {
         });
 
         BpiService.getCurrentCurrencyData(item.currency)
-            .then(item => {
-                this.setState({selectedCurrencyItem: item});
-            })
+            .then(item => {this.setState({selectedCurrencyItem: item});})
             .catch(error => {return error})
             .finally(() => { this.setState({isLoading: false}) });
     };
