@@ -2,8 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const DEV_SERVER_PORT = 8080;
-
 module.exports = {
     entry: './src/index.js',
 
@@ -59,27 +57,4 @@ module.exports = {
             hash: true
         })
     ],
-
-    devServer: {
-        contentBase: './dist',
-        compress: true,
-        historyApiFallback: true,
-        hot: true,
-        open: true,
-        overlay: true,
-        port: DEV_SERVER_PORT,
-
-        proxy: [
-            {
-                context: ['/api'],
-                target: 'https://api.coindesk.com/v1/bpi/',
-                pathRewrite: {'^/api' : ''},
-                secure: true,
-                changeOrigin: true
-            }
-        ]
-    },
-
-    mode: 'development',
-    devtool: 'eval-source-map',
 };
