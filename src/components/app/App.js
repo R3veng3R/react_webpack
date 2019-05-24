@@ -4,6 +4,7 @@ import debounce from "lodash.debounce";
 import BpiService from "@/services/bpi.service";
 import AutocompleteList from "@/components/autocompleteList/AutocompleteList";
 import CurrencyDisplay from "@/components/currencyDisplay/CurrencyDisplay";
+import Loader from './Loader';
 
 import './app.scss';
 
@@ -16,7 +17,8 @@ class App extends Component {
         this.state = {
             value: '',
             suggestions: [],
-            selectedCurrencyItem: {}
+            selectedCurrencyItem: {},
+            isLoading: false
         };
     }
 
@@ -35,8 +37,6 @@ class App extends Component {
     }
 
     getSupportedCurrencies = debounce(() => {
-        console.log('test debounce');
-
         BpiService.getSupportedCurrencies()
             .then(data => {
                 this.setState({suggestions: this.filterData(data)});
@@ -63,23 +63,26 @@ class App extends Component {
         this.setState({
             value: item.currency,
             suggestions: [],
+            isLoading: true
         });
 
         BpiService.getCurrentCurrencyData(item.currency)
             .then(item => {
                 this.setState({selectedCurrencyItem: item});
             })
-            .catch(error => {return error});
+            .catch(error => {return error})
+            .finally(() => { this.setState({isLoading: false}) });
     };
 
     render() {
         return (
-            <div className="container">
+            <div className="app-container">
                 <div className="autocomplete">
                     <Input value={this.state.value} onChange={event => this.setValue(event.target.value)} />
                     <AutocompleteList suggestions={this.state.suggestions} onClick={ this.setCurrencyItem } />
                 </div>
                 <CurrencyDisplay currencyData={this.state.selectedCurrencyItem}/>
+                <Loader isLoading={this.state.isLoading} />
             </div>
         );
     }

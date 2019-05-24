@@ -7,8 +7,12 @@ const CURRENT_PRICE_API = '/api/currentprice/';
 const CURRENT_HISTORY_API = '/api/historical/close.json';
 const DATE_FORMAT = 'YYYY-MM-DD';
 
+/*
+ * WE WRAP ALL OUR AXIOS REQUESTS IN ANOTHER PROMISE
+ * TO PROCESS ALL THE ERRORS THAT COULD HAPPEN
+ * WHEN FETCHING DATA AND HANDLE THEM CORRECTLY
+*/
 class BpiService extends BaseService {
-
     getSupportedCurrencies() {
         return new Promise((resolve, reject) => {
             return this.request().get(SUPPORTED_CURRENCIES_API)
@@ -17,17 +21,6 @@ class BpiService extends BaseService {
                     reject(new ErrorWrapper(error))
                 });
         });
-    }
-
-    getCurrentPrice(code) {
-        return this.request().get(CURRENT_PRICE_API + code + '.json');
-    }
-
-    getLastMonthHistory(code) {
-        let startDate = moment().subtract(1,'months').startOf('month').format(DATE_FORMAT);
-        let endDate = moment().subtract(1,'months').endOf('month').format(DATE_FORMAT);
-
-        return this.request().get(CURRENT_HISTORY_API + '?currency=' + code + '&start=' + startDate + '&end=' + endDate);
     }
 
     getCurrentCurrencyData(code) {
@@ -49,6 +42,24 @@ class BpiService extends BaseService {
                     reject(new ErrorWrapper(error))
                 });
         });
+    }
+
+    getCurrentPrice(code) {
+        return this.request().get(CURRENT_PRICE_API + code + '.json');
+    }
+
+    getLastMonthHistory(code) {
+        let startDate = moment()
+                .subtract(1,'months')
+                    .startOf('month')
+                        .format(DATE_FORMAT);
+
+        let endDate = moment()
+                .subtract(1,'months')
+                    .endOf('month')
+                        .format(DATE_FORMAT);
+
+        return this.request().get(CURRENT_HISTORY_API + '?currency=' + code + '&start=' + startDate + '&end=' + endDate);
     }
 }
 

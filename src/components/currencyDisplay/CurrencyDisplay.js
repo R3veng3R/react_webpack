@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import './currency-display.scss';
 
 class CurrencyDisplay extends Component {
     constructor(props) {
@@ -8,27 +9,36 @@ class CurrencyDisplay extends Component {
     printHistory = () => {
         let historyData = this.props.currencyData.history;
 
-        if (!historyData || historyData.length === 0) {
-            return [];
-        }
-
         return (
             Object.keys(historyData).map(date =>
-                <div>
+                <div key={date}>
                     {date} : {historyData[date]}
                 </div>
             )
         );
     };
 
-    render() {
-        return (
-            <div className="currency-display">
-                <p>CurrentPrice: {this.props.currencyData.currentPrice} </p>
-                { this.printHistory() }
-            </div>
-        );
+    getTemplate = () => {
+        let data = this.props.currencyData;
+
+        if (!this.isEmptyData(data)) {
+            return (
+                <div className="currency-display">
+                    <p>Current Price: {this.props.currencyData.currentPrice} </p>
+                    { this.printHistory() }
+                </div>
+            );
+
+        } else {
+            return '';
+        }
+    };
+
+    isEmptyData(data) {
+        return Object.entries(data).length === 0;
     }
+
+    render() { return this.getTemplate(); }
 }
 
 export default CurrencyDisplay;

@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import ListItem from "@/components/autocompleteList/ListItem";
 
+import './autocomplete.scss';
+
 class AutocompleteList extends Component {
     constructor(props) {
         super(props);
