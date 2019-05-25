@@ -3,6 +3,8 @@
 * React 16
 * Webpack 4
 * Babel 7
+* Axios
+* Jest with enzyme for tests
 
 ## Installation
 
@@ -11,3 +13,4 @@
 * npm install
 * npm start
 * visit `http://localhost:8080/`
+* NB: npm run test for tests
