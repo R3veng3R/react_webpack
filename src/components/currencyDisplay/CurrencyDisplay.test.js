@@ -21,12 +21,6 @@ describe('CurrencyDisplay Test Suite', () => {
 
     });
 
-    it('Should mount the CurrencyDisplay component', () => {
-        let wrapper = mount(<CurrencyDisplay currencyData={ testData } />);
-        let actual = wrapper.find('div.history-record').length;
-        expect(actual).toBe(5);
-    });
-
     it('Should return true on empty object', () => {
         let data = {};
         let wrapper = shallow(<CurrencyDisplay />);
@@ -39,6 +33,12 @@ describe('CurrencyDisplay Test Suite', () => {
         let wrapper = shallow(<CurrencyDisplay />);
         let actual = wrapper.instance().isEmptyData(data);
         expect(actual).toBe(false);
+    });
+
+    it('Should mount the CurrencyDisplay component', () => {
+        let wrapper = mount(<CurrencyDisplay currencyData={ testData } />);
+        let actual = wrapper.find('div.history-record').length;
+        expect(actual).toBe(5);
     });
 
     it('Should hide (not render) the CurrencyDisplay component', () => {
