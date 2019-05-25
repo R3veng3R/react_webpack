@@ -10,7 +10,7 @@ class Input extends Component {
 
     render() {
         return (
-            <input type="text" placeholder="Start typing currency" value={this.props.value} onChange={this.props.onChange} />
+            <input type="text" placeholder="Start to type currency" value={this.props.value} onChange={this.props.onChange} />
         );
     }
 }
