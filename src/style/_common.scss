@@ -1,0 +1,18 @@
+@import "variables";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(to bottom, $bg-gradient-color-1, $bg-gradient-color-2);
+  font-family: $global-font;
+  margin: 0;
+}
+
+#root {
+  min-height: 100vh;
+  overflow: hidden;
+  text-align: center;
+  padding: 10px;
+}

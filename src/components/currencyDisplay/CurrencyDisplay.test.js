@@ -23,14 +23,14 @@ describe('CurrencyDisplay Test Suite', () => {
 
     it('Should return true on empty object', () => {
         let data = {};
-        let wrapper = shallow(<CurrencyDisplay />);
+        let wrapper = shallow(<CurrencyDisplay  currencyData={ data }/>);
         let actual = wrapper.instance().isEmptyData(data);
         expect(actual).toBe(true);
     });
 
     it('Should return false on object', () => {
         let data = { hello: 'world'};
-        let wrapper = shallow(<CurrencyDisplay />);
+        let wrapper = shallow(<CurrencyDisplay currencyData={ {} } />);
         let actual = wrapper.instance().isEmptyData(data);
         expect(actual).toBe(false);
     });

@@ -8,19 +8,15 @@ import Loader from './Loader';
 
 import './app.scss';
 
-const DEBOUNCE_DELAY_TIME_MS = 600;
+const DEBOUNCE_DELAY_TIME_MS = 400;
 
 class App extends Component {
-    constructor() {
-        super();
-
-        this.state = {
-            value: '',
-            suggestions: [],
-            selectedCurrencyItem: {},
-            isLoading: false
-        };
-    }
+    state = {
+        value: '',
+        suggestions: [],
+        selectedCurrencyItem: {},
+        isLoading: false
+    };
 
     setValue(value) {
         this.setState({

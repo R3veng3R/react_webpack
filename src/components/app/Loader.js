@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import PropTypes from "prop-types";
 import './loader.scss';
 
 /**
@@ -6,13 +7,13 @@ import './loader.scss';
  * to save some time.
  */
 class Loader extends Component {
-    constructor(props) {
-        super(props);
-    }
+    static propTypes = {
+        isLoading: PropTypes.bool.isRequired
+    };
 
     getTemplate = () => {
         if (!this.props.isLoading) {
-            return '';
+            return null;
         }
 
         return (

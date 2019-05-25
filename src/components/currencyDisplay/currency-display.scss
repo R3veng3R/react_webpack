@@ -1,4 +1,12 @@
 .currency-display {
   margin: 0 auto;
-  width: 190px;
+  display: inline-block;
+
+  .current-price {
+    text-decoration: underline;
+  }
+
+  .price-history {
+    text-align: left;
+  }
 }

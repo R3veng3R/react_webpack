@@ -1,10 +1,11 @@
 import React, {Component} from "react";
 import './currency-display.scss';
+import PropTypes from "prop-types";
 
 class CurrencyDisplay extends Component {
-    constructor(props) {
-        super(props);
-    }
+    static propTypes = {
+        currencyData: PropTypes.object.isRequired
+    };
 
     printHistory = () => {
         let historyData = this.props.currencyData.history;
@@ -12,26 +13,10 @@ class CurrencyDisplay extends Component {
         return (
             Object.keys(historyData).map(date =>
                 <div className="history-record" key={date}>
-                    {date} : {historyData[date]}
+                    <i className="far fa-calendar-check"></i> {date} : {historyData[date]}
                 </div>
             )
         );
-    };
-
-    getTemplate = () => {
-        let data = this.props.currencyData;
-
-        if (!this.isEmptyData(data)) {
-            return (
-                <div className="currency-display">
-                    <p>Current Price: {this.props.currencyData.currentPrice} </p>
-                    { this.printHistory() }
-                </div>
-            );
-
-        } else {
-            return '';
-        }
     };
 
     isEmptyData(data) {
@@ -39,7 +24,26 @@ class CurrencyDisplay extends Component {
         return Object.entries(data).length === 0;
     }
 
-    render() { return this.getTemplate(); }
+    getTemplate = () => {
+        let data = this.props.currencyData;
+
+        if (this.isEmptyData(data)) {
+            return null;
+        }
+
+        return (
+            <div className="currency-display">
+                <p className="current-price">Current Price: {this.props.currencyData.currentPrice} </p>
+                <h2 className="price-history-header"><i className="fas fa-chart-line"></i> Price History: </h2>
+
+                <div className="price-history">{this.printHistory()}</div>
+            </div>
+        );
+    };
+
+    render() {
+        return this.getTemplate();
+    }
 }
 
 export default CurrencyDisplay;

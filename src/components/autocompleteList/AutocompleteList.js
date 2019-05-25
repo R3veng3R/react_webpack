@@ -1,12 +1,14 @@
 import React, {Component} from "react";
 import ListItem from "@/components/autocompleteList/ListItem";
+import PropTypes from "prop-types";
 
 import './autocomplete.scss';
 
 class AutocompleteList extends Component {
-    constructor(props) {
-        super(props);
-    }
+    static propTypes = {
+        suggestions: PropTypes.array.isRequired,
+        onClick: PropTypes.func.isRequired
+    };
 
     render() {
         return (

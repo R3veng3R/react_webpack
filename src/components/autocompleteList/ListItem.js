@@ -1,10 +1,11 @@
 import React, {Component} from "react";
-
+import PropTypes from "prop-types";
 
 class ListItem extends Component {
-    constructor(props) {
-        super(props);
-    }
+    static propTypes = {
+        item: PropTypes.object.isRequired,
+        onClick: PropTypes.func.isRequired
+    };
 
     render() {
         return (

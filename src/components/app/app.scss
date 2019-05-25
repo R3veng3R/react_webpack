@@ -1,12 +1,15 @@
-* {
-  box-sizing: border-box;
-}
+@import "../../style/variables";
 
 .app-container {
+  @extend %shadow;
   min-width: 16rem;
   max-width: 25rem;     // FOR MOBILE VIEW 320x900
-  margin-right: auto;
-  margin-left: auto;
+  min-height: 100px;
+  margin: 0 auto;
+  background-color: #FFC;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding-bottom: 15px;
 
   .autocomplete {
     position: relative;
