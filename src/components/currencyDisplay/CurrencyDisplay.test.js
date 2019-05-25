@@ -34,6 +34,13 @@ describe('CurrencyDisplay Test Suite', () => {
         expect(actual).toBe(true);
     });
 
+    it('Should return false on object', () => {
+        let data = { hello: 'world'};
+        let wrapper = shallow(<CurrencyDisplay />);
+        let actual = wrapper.instance().isEmptyData(data);
+        expect(actual).toBe(false);
+    });
+
     it('Should hide (not render) the CurrencyDisplay component', () => {
         let data = {};
         let wrapper = mount(<CurrencyDisplay currencyData={ data } />);
