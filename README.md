@@ -11,6 +11,6 @@
 * git clone https://github.com/R3veng3R/react_webpack.git
 * cd react_webpack
 * npm install
-* npm start
+* npm run dev
 * visit `http://localhost:8080/`
 * NB: npm run test for tests
