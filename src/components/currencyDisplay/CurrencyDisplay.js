@@ -11,7 +11,7 @@ class CurrencyDisplay extends Component {
 
         return (
             Object.keys(historyData).map(date =>
-                <div key={date}>
+                <div className="history-record" key={date}>
                     {date} : {historyData[date]}
                 </div>
             )
@@ -35,6 +35,7 @@ class CurrencyDisplay extends Component {
     };
 
     isEmptyData(data) {
+        if (!data) { return true; }
         return Object.entries(data).length === 0;
     }
 
